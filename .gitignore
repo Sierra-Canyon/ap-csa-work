@@ -1,0 +1,11 @@
+# Compiled output
+out/
+*.class
+
+# JUnit console launcher, downloaded on demand from January onward
+lib/
+
+# Editor and OS noise
+.vscode/
+.idea/
+.DS_Store

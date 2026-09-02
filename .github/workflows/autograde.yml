@@ -1,0 +1,32 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Compile
+        run: |
+          mkdir -p out
+          javac -d out $(find src tools tests -name '*.java')
+
+      # The autograder decides the outcome of this run.
+      - name: Autograde
+        run: java -cp out RunAll
+
+      # Never fails the build. It reports Java that works and will not be on the
+      # Quick Reference in May, which is a thing to know, not a thing to block on.
+      - name: AP subset scan
+        if: always()
+        run: java -cp out ApSubset src
