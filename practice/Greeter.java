@@ -17,5 +17,12 @@
 public class Greeter {
     public static void main(String[] args) {
         System.out.println("Ready to compile.");
+        String name = "Ada";
+        System.out.println(name.length());
+
+        int count = 3;
+        if (count > 0) {
+            System.out.println(name.substring(0, name.length()));
+        }
     }
 }
