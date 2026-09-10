@@ -59,14 +59,21 @@ Setup done, permanently.
 ## Every time I announce an update
 
 ```bash
-git status                 # commit your own work first, this must be clean
+git status                            # commit your own work first, this must be clean
 git checkout main
-git pull template main     # <- that is it
+git pull --no-rebase template main    # <- that is it
 git push
 
-git checkout jd12-unit1    # your branch, with your username
+git checkout jd12-unit1               # your branch, with your username
 git merge main
 ```
+
+> **`--no-rebase` is not optional, and leaving it off is the one way to make a mess
+> here.** In setup you told git `pull.rebase true`, which is right for your own work
+> and wrong for this. Without the flag git rebases your `main` on top of mine,
+> rewrites the history your repository was created with, and then refuses your
+> `git push` because the two no longer match. The next thing anybody tries at that
+> point is a force-push, which is rule 3. Type the flag.
 
 Because the histories are linked, git now knows what changed on my side, what changed on
 yours, and combines them. **Files you have edited are not overwritten.** Files you never
